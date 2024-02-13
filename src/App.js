@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import PageNavbar from './components/layout/Navbar/Navbar';
+import TablesList from './components/features/TablesList/TablesList';
+import { Container } from 'react-bootstrap';
+import TablePage from './components/pages/TablePage/TablePage';
+import Footer from './components/layout/Footer/Footer';
+import NotFound from './components/pages/NotFound/NotFound';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='app'>
+      <BrowserRouter>
+        <PageNavbar />
+        <Container className='p-3'>
+          <Routes>
+            <Route path='/' element={<TablesList />} />
+            <Route path='table/:tableId' element={<TablePage />} />
+            <Route path='*' element={<NotFound />} />
+          </Routes>
+          <Footer />
+        </Container>
+      </BrowserRouter>
     </div>
   );
 }
